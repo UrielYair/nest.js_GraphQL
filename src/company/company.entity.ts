@@ -8,4 +8,6 @@ export class Company {
     id: string;
     @Column()
     name: string;
+    @Column()
+    employees: string[];
 }

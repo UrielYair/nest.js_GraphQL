@@ -18,12 +18,21 @@ export class CompanyService {
     }
 
     async createCompany(createCompanyInput: CreateCompanyInput): Promise<Company>{
-        const { name } = createCompanyInput;
+        const { name, employees } = createCompanyInput;
         const newCompany = this.companyRepository.create({
             id: uuid(),
-            name
+            name,
+            employees
         });
 
         return this.companyRepository.save(newCompany);
+    }
+
+    async assignEmployeesToCompany(
+            companyId: string, 
+            employeeIds: string[]) : Promise<Company>{
+        const company = await this.companyRepository.findOne({id:companyId});
+        company.employees = [...company.employees, ...employeeIds];
+        return this.companyRepository.save(company);
     }
 }
