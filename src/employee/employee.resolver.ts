@@ -21,4 +21,5 @@ export class EmployeeResolver{
     createEmployee(@Args('createEmployeeInput') createEmployeeInput: CreateEmployeeInput){
         return this.employeeService.createEmployee(createEmployeeInput);
     }
+
 }
