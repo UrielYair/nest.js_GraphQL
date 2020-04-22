@@ -38,4 +38,11 @@ export class EmployeeService {
             }
         });
     }
+
+    async deleteEmployee(id: string ): Promise<Employee> {    
+        const employeeToRemove = await this.employeeRepository.findOne({ id });
+        this.employeeRepository.delete(employeeToRemove);
+        return employeeToRemove;
+    }
+    
 }

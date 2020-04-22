@@ -6,7 +6,7 @@ import { AssignEmployeesToCompanyInput } from './assign-Employees-To-Company.inp
 import { Company } from './company.entity';
 import { EmployeeService } from '../employee/employee.service';
 
-@Resolver(of => CompanyType)
+@Resolver(() => CompanyType)
 export class CompanyResolver{
     constructor( 
         private companyService: CompanyService,
@@ -40,5 +40,10 @@ export class CompanyResolver{
     @ResolveField()
     async employees(@Parent() company: Company){
         return this.employeeService.getManyEmployees(company.employees);
+    }
+
+    @Mutation(returns => CompanyType)
+    deleteCompany(@Args('companyId') companyId: string) {
+        return this.companyService.deleteCompany(companyId);
     }
 }

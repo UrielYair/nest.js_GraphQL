@@ -3,7 +3,7 @@ import { EmployeeType } from './employee.type';
 import { EmployeeService } from './employee.service';
 import { CreateEmployeeInput } from './employee.input';
 
-@Resolver(of => EmployeeType)
+@Resolver(() => EmployeeType)
 export class EmployeeResolver{
     constructor(private employeeService: EmployeeService) {}
 
@@ -22,4 +22,9 @@ export class EmployeeResolver{
         return this.employeeService.createEmployee(createEmployeeInput);
     }
 
+    @Mutation(returns => EmployeeType)
+    deleteEmployee(@Args('employeeId') employeeId: string) {
+        return this.employeeService.deleteEmployee(employeeId);
+    }
+    
 }

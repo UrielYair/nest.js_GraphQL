@@ -35,4 +35,10 @@ export class CompanyService {
         company.employees = [...company.employees, ...employeeIds];
         return this.companyRepository.save(company);
     }
+
+    async deleteCompany(id: string ): Promise<Company> {    
+        const companyToRemove = await this.companyRepository.findOne({ id });
+        this.companyRepository.delete(companyToRemove);
+        return companyToRemove;
+    }
 }
